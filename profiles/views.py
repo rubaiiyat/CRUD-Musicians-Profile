@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 
 
 def register(request):
@@ -39,8 +40,13 @@ def userLogin(request):
 
 
 def profiles(request):
-    page = "Profile"
-    return render(request, "profile.html", {"page": page})
+    if request.user.is_authenticated:
+        page = "Profile"
+        profile_data = User.objects.get(username=request.user)
+
+        return render(request, "profile.html", {"page": page, "data": profile_data})
+    else:
+        return redirect("login")
 
 
 def userLogout(request):

@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="text-2xl text-cyan-500 text-center">Home is Working</h1>
+  <div class="flex flex-wrap justify-around items-center gap-10 mx-20 mt-5">
+    {% for info in data %}
+      <div class="w-72 mx-auto bg-gray-900 text-white rounded-lg overflow-hidden shadow-lg mb-6 transform hover:scale-105 transition-transform duration-300">
+        <div class="flex justify-center mt-6">
+          <img class="w-24 h-24 rounded-full border-4 border-gray-700" src="https://via.placeholder.com/150" alt="Profile Picture" />
+        </div>
+        <div class="text-center mt-4">
+          <h2 class="text-xl font-semibold">{{ info.first_name }} {{ info.last_name }}</h2>
+          <p class="text-sm text-gray-400">{{ info.email }}</p>
+        </div>
+        <div class="mt-6 px-6 text-center">
+          <div class="flex justify-between text-sm">
+            <div>
+              <p class="font-bold text-lg">{{ info.count_followers }}</p>
+              <p class="text-gray-400">Followers</p>
+            </div>
+            <div>
+              <p class="font-bold text-lg">{{ info.count_following }}</p>
+              <p class="text-gray-400">Following</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 flex justify-around gap-14 px-6 pb-6">
+          <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 font-semibold text-sm">Follow</button>
+          <button class="bg-gray-700 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-gray-600 transition duration-300 font-semibold text-sm">Message</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

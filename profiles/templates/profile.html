@@ -1,5 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="text-2xl text-cyan-500 text-center">Profile is Working</h1>
+  <div class="max-w-sm mx-auto bg-gray-800 text-white rounded-lg overflow-hidden shadow-lg mt-2">
+    <div class="flex justify-center mt-6">
+      <img class="w-32 h-32 rounded-full border-4 border-gray-700" src="https://via.placeholder.com/150" alt="Profile Picture" />
+    </div>
+    <div class="text-center mt-4">
+      <h2 class="text-2xl font-semibold">{{ data.first_name }} {{ data.last_name }}</h2>
+      <p class="text-sm text-gray-400">{{ data.email }}</p>
+    </div>
+    <div class="mt-6 px-6 text-center">
+      <div class="flex justify-between text-sm">
+        <div>
+          <p class="font-bold text-lg">1.2k</p>
+          <p class="text-gray-400">Followers</p>
+        </div>
+        <div>
+          <p class="font-bold text-lg">200</p>
+          <p class="text-gray-400">Following</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 flex justify-between px-6 pb-6">
+      <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 w-5/12 font-semibold text-sm">Follow</button>
+      <button class="bg-gray-700 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-gray-600 transition duration-300 w-5/12 font-semibold text-sm">Message</button>
+    </div>
+  </div>
 {% endblock %}
