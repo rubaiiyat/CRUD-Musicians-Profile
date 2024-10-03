@@ -19,20 +19,24 @@
               <li>
                 <a class="hover:text-gray-200" href="{% url 'home' %}">Home</a>
               </li>
-              <li>
-                <a class="hover:text-gray-200" href="{% url 'register' %}">Register</a>
-              </li>
-              <li>
-                <a class="hover:text-gray-200" href="{% url 'login' %}">Login</a>
-              </li>
-              <li>
-                <a class="hover:text-gray-200" href="{% url 'profile' %}">Profile</a>
-              </li>
+
+              {% if user.is_authenticated %}
+                <li>
+                  <a class="hover:text-gray-200" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li>
+                  <a class="hover:text-gray-200" href="{% url 'logout' %}">Logout</a>
+                </li>
+              {% else %}
+                <li>
+                  <a class="hover:text-gray-200" href="{% url 'register' %}">Register</a>
+                </li>
+                <li>
+                  <a class="hover:text-gray-200" href="{% url 'login' %}">Login</a>
+                </li>
+              {% endif %}
               <li>
                 <a class="hover:text-gray-200" href="{% url 'album' %}">Album</a>
-              </li>
-              <li>
-                <a class="hover:text-gray-200" href="#">Contact Us</a>
               </li>
             </ul>
 

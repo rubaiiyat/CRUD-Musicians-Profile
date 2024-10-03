@@ -5,20 +5,23 @@ from django.contrib.auth.forms import AuthenticationForm
 
 
 def register(request):
-    page = "Register"
-    if request.method == "POST":
-        form = forms.userRegistration(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("register")
+    if request.user.is_authenticated:
+        return redirect("profile")
     else:
-        form = forms.userRegistration()
-    return render(request, "register.html", {"page": page, "form": form})
+        page = "Register"
+        if request.method == "POST":
+            form = forms.userRegistration(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("register")
+        else:
+            form = forms.userRegistration()
+        return render(request, "register.html", {"page": page, "form": form})
 
 
 def userLogin(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("profile")
     else:
         page = "Login"
         if request.method == "POST":
@@ -29,7 +32,7 @@ def userLogin(request):
                 user = authenticate(request, username=name, password=userPass)
                 if user is not None:
                     form = login(request, user)
-                    return redirect("home")
+                    return redirect("profile")
         else:
             form = AuthenticationForm()
         return render(request, "register.html", {"page": page, "form": form})
@@ -38,3 +41,11 @@ def userLogin(request):
 def profiles(request):
     page = "Profile"
     return render(request, "profile.html", {"page": page})
+
+
+def userLogout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect("home")
+    else:
+        return redirect("login")
