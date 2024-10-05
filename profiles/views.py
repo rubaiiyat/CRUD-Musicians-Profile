@@ -4,22 +4,24 @@ from django.contrib.auth import login, logout, authenticate, update_session_auth
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 
-def register(request):
-    if request.user.is_authenticated:
-        return redirect("profile")
-    else:
-        page = "Register"
-        if request.method == "POST":
-            form = forms.userRegistration(request.POST)
-            if form.is_valid():
-                messages.success(request, "Account Registration Successfull")
-                form.save()
-                return redirect("register")
-        else:
-            form = forms.userRegistration()
-        return render(request, "register.html", {"page": page, "form": form})
+class register(CreateView):
+    form_class = forms.userRegistration
+    template_name = "register.html"
+    success_url = reverse_lazy("register")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = "Register"
+        return context
+
+    def form_valid(self, form):
+        # Add success message correctly
+        messages.success(self.request, "Account Created Successfully")
+        return super().form_valid(form)
 
 
 def userLogin(request):
