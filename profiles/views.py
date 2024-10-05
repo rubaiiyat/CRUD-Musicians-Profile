@@ -112,8 +112,6 @@ class chngPassword(PasswordChangeView):
 
 def userLogout(request):
     if request.user.is_authenticated:
-        messages.success(request, "Logged Out Successfull")
         logout(request)
-        return redirect("home")
-    else:
+
         return redirect("login")
