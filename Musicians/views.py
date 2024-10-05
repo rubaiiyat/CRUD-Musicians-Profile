@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 def home(request):
     page = "Home"
-    data = User.objects.all()
+    data = User.objects.filter(is_superuser=False, is_staff=False)
 
     for user in data:
         user.count_followers = random.randint(10000, 50000)
