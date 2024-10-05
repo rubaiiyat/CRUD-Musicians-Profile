@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.generic import CreateView, TemplateView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.urls import reverse_lazy
 
 
@@ -89,20 +89,25 @@ def editProfile(request):
         return redirect("login")
 
 
-def chngPassword(request):
-    page = "Change Password"
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            form = PasswordChangeForm(user=request.user, data=request.POST)
-            if form.is_valid():
-                messages.success(request, "Successfully Password Updated")
-                update_session_auth_hash(request, request.user)
-                form.save()
-        else:
-            form = PasswordChangeForm(request.user)
-        return render(request, "passchng.html", {"form": form})
-    else:
-        return redirect("login")
+class chngPassword(PasswordChangeView):
+    template_name = "passchng.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect("login")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = "Change Password"
+        return context
+
+    def get_success_url(self) -> str:
+        return reverse_lazy("profile")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Updated Your Password")
+        return super().form_valid(form)
 
 
 def userLogout(request):
