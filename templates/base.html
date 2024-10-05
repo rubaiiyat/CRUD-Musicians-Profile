@@ -73,6 +73,9 @@
       </section>
     </div>
 
+    {% for m in messages %}
+      <h1 class="text-{{ m.tags }} text-center text-2xl">{{ m }}</h1>
+    {% endfor %}
     {% block content %}
 
     {% endblock %}

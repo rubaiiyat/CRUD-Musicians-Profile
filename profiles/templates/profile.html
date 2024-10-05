@@ -25,5 +25,21 @@
       <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 w-5/12 font-semibold text-sm">Follow</button>
       <button class="bg-gray-700 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-gray-600 transition duration-300 w-5/12 font-semibold text-sm">Message</button>
     </div>
+    <div class="mt-6 flex justify-between px-6 pb-6">
+      <!-- Edit Profile Button -->
+      <button class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-6 py-2 rounded-full shadow-lg hover:from-purple-600 hover:to-indigo-700 transition duration-300 w-5/12 font-semibold text-sm flex items-center justify-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 11V9m-1-1h2m4 4h.01M6 18l6-6 3 3 6-6M3 17h6v6H3z" />
+        </svg>
+        <a href="{% url 'editprofile' %}">Edit Profile</a>
+      </button>
+
+      <!-- Change Password Button -->
+      <button class="bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-2 rounded-full shadow-lg hover:from-green-600 hover:to-teal-700 transition duration-300 w-5/12 font-semibold text-sm flex items-center justify-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12v2m0-10h.01M3 17v-2h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+        </svg><a href="{% url 'changepassword' %}">Change Password</a>
+      </button>
+    </div>
   </div>
 {% endblock %}
