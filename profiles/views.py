@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from . import forms
-from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.contrib.auth.models import User
+from django.contrib.auth import logout
+
 from django.contrib import messages
 from django.views.generic import CreateView, TemplateView
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.urls import reverse_lazy
 
 
