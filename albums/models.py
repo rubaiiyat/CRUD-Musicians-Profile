@@ -13,9 +13,9 @@ class albumModel(models.Model):
     ]
 
     albumName = models.CharField(max_length=100)
-    artist = models.OneToOneField(User, on_delete=models.CASCADE)
+    artist = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=False)
-    rating = models.CharField(max_length=50, choices=select, default=1)
+    rating = models.IntegerField(choices=select, default=5)
 
     def __str__(self) -> str:
         return f"{self.albumName} by {self.artist}"

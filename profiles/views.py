@@ -24,9 +24,12 @@ class register(CreateView):
         return context
 
     def form_valid(self, form):
-        # Add success message correctly
         messages.success(self.request, "Account Created Successfully")
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.warning(self.request, "Invalid Username or Email")
+        return super().form_invalid(form)
 
 
 class userLogin(LoginView):
@@ -68,6 +71,7 @@ class profiles(TemplateView):
         context = super().get_context_data(**kwargs)
         context["page"] = "User Profile"
         context["data"] = self.request.user
+
         return context
 
 
